@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {VocabularyContext} from './VocabularyContext';
+import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
 
 export const LettersContext = React.createContext();
 
 export const LettersProvider = (props) => {
 
-    const {generatedWord} = useContext(VocabularyContext);
+    const generatedWord = useSelector(state => state.words.generatedWord);
     const [correctLetters, setCorrectLetters] = useState([]);
     const [wrongLetters, setWrongLetters] = useState([]);
     const [isLastlyGuessedLetterWrong, setIsLastlyGuessedLetterWrong] = useState();

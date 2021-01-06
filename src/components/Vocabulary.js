@@ -3,14 +3,18 @@ import {VocabularyContext} from '../context/VocabularyContext';
 import styled from 'styled-components';
 import englishFlag from '../images/english_flag.png';
 import germanFlag from '../images/german_flag.png';
+import {useDispatch, useSelector} from 'react-redux';
+import {setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
 
 const Vocabulary = () => {
 
-    const {generateWord, generatedWord, vocabulary, 
-        setWordBeforeVisitingVocabularies} = useContext(VocabularyContext);
+
+    const {generateWord, vocabulary} = useContext(VocabularyContext);
+    const generatedWord = useSelector(state => state.words.generatedWord);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setWordBeforeVisitingVocabularies(generatedWord);
+        dispatch(setWordBeforeVisitingVocabularies(generatedWord));
     }, [])
 
 
