@@ -2,8 +2,8 @@ import React, {useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import {DrawingContext} from '../context/DrawingContext';
 import {useLocation} from 'react-router-dom';
-import {setIsEndOfGame} from '../features/gameStatusSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import {setIsEndOfGame} from '../features/gameStatusSlice';
 import {setIsLastlyGuessedLetterWrong} from '../features/letters/isLastlyGuessedLetterWrongSlice';
 
 const Drawing = () => {

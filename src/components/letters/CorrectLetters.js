@@ -13,7 +13,6 @@ const CorrectLetters = () => {
     
 
     useEffect(() => {
-        console.log(correctLetters)
         if (!correctLetters.includes(null) && correctLetters.length !== 0) {
             dispatch(setIsEndOfGame(true));
             dispatch(setIsPlayerWon(true));
