@@ -1,12 +1,12 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {v4 as uuidv4} from 'uuid';
 import styled from 'styled-components'
 import WrongLetter from './WrongLetter';
-import {LettersContext} from '../../context/LettersContext';
+import {useSelector} from 'react-redux';
 
 const WrongLetters = () => {
 
-    const {wrongLetters} = useContext(LettersContext);
+    const wrongLetters = useSelector(state => state.wrongLetters);
 
     return ( 
         <StyleWrapper id="wrong-letters" className="styled-div">

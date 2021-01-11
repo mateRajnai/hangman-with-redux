@@ -6,13 +6,16 @@ const wrongLettersSlice = createSlice({
     name: 'wrongLetters',
     initialState,
     reducers: {
-        setWrongLetters(state, action) {
-            state = action.payload;
+        addWrongLetter(state, action) {
+            state.push(action.payload);
+        },
+        clearWrongLetters(state) {
+            state = [];
             return state;
         }
     }
 })
 
-export const {} = wrongLettersSlice.actions;
+export const {addWrongLetter, clearWrongLetters} = wrongLettersSlice.actions;
 
 export default wrongLettersSlice.reducer;
