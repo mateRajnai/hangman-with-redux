@@ -5,9 +5,11 @@ export const GameStatusContext = React.createContext();
 
 export const GameStatusProvider = (props) => {
 
-    const [isEndOfGame, setIsEndOfGame] = useState(false);
-    const [isPlayerWon, setIsPlayerWon] = useState(false);
-    
+    // const [isEndOfGame, setIsEndOfGame] = useState(false);
+    const isEndOfGame = useSelector(state => state.gameStatus.isEndOfGame);
+    // const [isPlayerWon, setIsPlayerWon] = useState(false);
+    const isPlayerWon = useSelector(state => state.gameStatus.isPlayerWon);
+
     const generateWord = useSelector(state => state.words.generateWord);
 
     const startNewGame = (e) => {
