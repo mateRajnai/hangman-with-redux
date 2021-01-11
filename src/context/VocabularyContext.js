@@ -4,6 +4,7 @@ import {setVocabulary} from '../features/vocabulary/vocabularySlice';
 import {setGeneratedWord} from '../features/wordsSlice';
 export const VocabularyContext = React.createContext();
 
+// refactor
 export const VocabularyProvider = (props) => {
 
     

@@ -15,7 +15,7 @@ const wordsSlice = createSlice({
             // return state;
         },
         setWordBeforeVisitingVocabularies(state, action) {
-            state = action.payload.wordBeforeVisitingVocabularies;
+            state.wordBeforeVisitingVocabularies = action.payload;
             // return state;
         }
     }
