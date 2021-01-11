@@ -13,7 +13,7 @@ const Vocabulary = () => {
     const vocabulary = useSelector(state => state.vocabulary)
     const dispatch = useDispatch();
 
-    const generateWord = (event) => {
+    const startNewGameAfterChangingVocabulary = (event) => {
         const chosenVocabulary = event.target.getAttribute("data-vocabulary") || vocabulary;
         dispatch(setVocabulary(chosenVocabulary));
         dispatch(setWordBeforeVisitingVocabularies(generatedWord));
@@ -36,10 +36,10 @@ const Vocabulary = () => {
             </div>
             <div id="available-vocabularies" className="vocabulary-container">
                 <h2>Available vocabularies:</h2>
-                <button type="button" className="flag-button"  onClick={generateWord}>
+                <button type="button" className="flag-button"  onClick={startNewGameAfterChangingVocabulary}>
                     <StyledFlag src={englishFlag} alt="English vocabulary" data-vocabulary="English"></StyledFlag>
                 </button>
-                <button type="button" className="flag-button" onClick={generateWord}>
+                <button type="button" className="flag-button" onClick={startNewGameAfterChangingVocabulary}>
                     <StyledFlag src={germanFlag} alt="German vocabulary" data-vocabulary="German"></StyledFlag>
                 </button>
             </div>
