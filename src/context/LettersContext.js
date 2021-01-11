@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {setCorrectLetters} from '../features/letters/correctLettersSlice';
 
 export const LettersContext = React.createContext();
 
 export const LettersProvider = (props) => {
 
     const generatedWord = useSelector(state => state.words.generatedWord);
-    const [correctLetters, setCorrectLetters] = useState([]);
+    const correctLetters = useSelector(state => state.correctLetters);
+    const dispatch = useDispatch();
     const [wrongLetters, setWrongLetters] = useState([]);
     const [isLastlyGuessedLetterWrong, setIsLastlyGuessedLetterWrong] = useState();
 
@@ -26,7 +28,7 @@ export const LettersProvider = (props) => {
             setWrongLetters([...wrongLetters, guessedLetter]);
             setIsLastlyGuessedLetterWrong(true);  
         } else {
-            setCorrectLetters(correctLettersToBeUpdated);
+            dispatch(setCorrectLetters(correctLettersToBeUpdated));
             setIsLastlyGuessedLetterWrong(false);
         }
     }
@@ -43,7 +45,7 @@ export const LettersProvider = (props) => {
     }
 
     useEffect(() => {
-        setCorrectLetters(createArrayContainingNullsWithLengthOf(generatedWord.length));
+        dispatch(setCorrectLetters(createArrayContainingNullsWithLengthOf(generatedWord.length)));
         setWrongLetters([]);
     }, [generatedWord])
 

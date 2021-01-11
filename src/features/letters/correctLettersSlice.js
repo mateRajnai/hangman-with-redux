@@ -16,5 +16,5 @@ const correctLettersSlice = createSlice({
 
 })
 
-export const {} = correctLettersSlice.actions;
+export const {setCorrectLetters} = correctLettersSlice.actions;
 export default correctLettersSlice.reducer;

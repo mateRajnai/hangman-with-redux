@@ -1,17 +1,19 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {v4 as uuidv4} from 'uuid';
-import {LettersContext} from '../../context/LettersContext';
 import CorrectLetter from './CorrectLetter';
 import {setIsPlayerWon, setIsEndOfGame} from '../../features/gameStatusSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const CorrectLetters = () => {
 
-    const {correctLetters} = useContext(LettersContext);
+    const correctLetters = useSelector(state => state.correctLetters)
     const dispatch = useDispatch();
 
+    
+
     useEffect(() => {
+        console.log(correctLetters)
         if (!correctLetters.includes(null) && correctLetters.length !== 0) {
             dispatch(setIsEndOfGame(true));
             dispatch(setIsPlayerWon(true));
