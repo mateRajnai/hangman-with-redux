@@ -1,10 +1,13 @@
 import React, {useContext} from 'react';
 import { GameStatusContext } from '../context/GameStatusContext';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
 
 const GameEndingFeedback = () => {
 
-    const {isEndOfGame, isPlayerWon, startNewGame} = useContext(GameStatusContext);
+    const {startNewGame} = useContext(GameStatusContext);
+    const isPlayerWon = useSelector(state => state.gameStatus.isPlayerWon);
+    const isEndOfGame = useSelector(state => state.gameStatus.isEndOfGame);
 
     return (
         isEndOfGame &&
