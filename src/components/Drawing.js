@@ -5,10 +5,14 @@ import {GameStatusContext} from '../context/GameStatusContext';
 import {DrawingContext} from '../context/DrawingContext';
 import {LettersContext} from '../context/LettersContext';
 import {useLocation} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Drawing = () => {
 
-    const {generatedWord, wordBeforeVisitingVocabularies} = useContext(VocabularyContext);
+    const {wordBeforeVisitingVocabularies} = useContext(VocabularyContext);
+    
+    const generatedWord = useSelector(state => state.words.generatedWord);
+
     const {isEndOfGame, setIsEndOfGame} = useContext(GameStatusContext);
     const {drawingParts, indexOfDrawingParts, 
         setIndexOfDrawingParts} = useContext(DrawingContext);
