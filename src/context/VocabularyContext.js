@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import {setVocabulary} from '../features/vocabulary/vocabularySlice';
-import {setGeneratedWord} from '../features/wordsSlice';
+import {setGeneratedWord, setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
 export const VocabularyContext = React.createContext();
 
 // refactor
@@ -9,25 +9,28 @@ export const VocabularyProvider = (props) => {
 
     
     const dispatch = useDispatch();
-    const vocabulary = useSelector(state => state.vocabulary)
+    const vocabulary = useSelector(state => state.vocabulary);
+    const generatedWord = useSelector(state => state.words.generatedWord);
+
 
     const generateWord = (event) => {
         const chosenVocabulary = event.target.getAttribute("data-vocabulary") || vocabulary;
         dispatch(setVocabulary(chosenVocabulary));
+        dispatch(setWordBeforeVisitingVocabularies(generatedWord));
         console.log(vocabulary)
-        let generatedWord;
+        let word;
         switch (chosenVocabulary) {
             case "English":
-                generatedWord = require('random-words')();
+                word = require('random-words')();
                 break;
             case "German":
-                generatedWord = require('random-noun-generator-german')();
+                word = require('random-noun-generator-german')();
                 break;
             default:
-                generatedWord = "apple";
+                word = "apple";
                 break;
         }
-        dispatch(setGeneratedWord(generatedWord)); 
+        dispatch(setGeneratedWord(word)); 
     }
 
     return (

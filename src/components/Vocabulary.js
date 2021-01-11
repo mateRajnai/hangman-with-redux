@@ -1,16 +1,13 @@
-import React, {useContext, useEffect} from 'react';
-import {VocabularyContext} from '../context/VocabularyContext';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import englishFlag from '../images/english_flag.png';
 import germanFlag from '../images/german_flag.png';
 import {useDispatch, useSelector} from 'react-redux';
-import {setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
 import {setVocabulary} from '../features/vocabulary/vocabularySlice';
-import {setGeneratedWord} from '../features/wordsSlice';
+import {setGeneratedWord, setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
 
 const Vocabulary = () => {
 
-    // const {generateWord} = useContext(VocabularyContext);
     const generatedWord = useSelector(state => state.words.generatedWord);
     const vocabulary = useSelector(state => state.vocabulary)
     const dispatch = useDispatch();
@@ -18,19 +15,20 @@ const Vocabulary = () => {
     const generateWord = (event) => {
         const chosenVocabulary = event.target.getAttribute("data-vocabulary") || vocabulary;
         dispatch(setVocabulary(chosenVocabulary));
-        let generatedWord;
+        dispatch(setWordBeforeVisitingVocabularies(generatedWord));
+        let word;
         switch (chosenVocabulary) {
             case "English":
-                generatedWord = require('random-words')();
+                word = require('random-words')();
                 break;
             case "German":
-                generatedWord = require('random-noun-generator-german')();
+                word = require('random-noun-generator-german')();
                 break;
             default:
-                generatedWord = "apple";
+                word = "apple";
                 break;
         }
-        dispatch(setGeneratedWord(generatedWord)); 
+        dispatch(setGeneratedWord(word)); 
     }
 
     useEffect(() => {
