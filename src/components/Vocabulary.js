@@ -9,8 +9,9 @@ import {setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
 const Vocabulary = () => {
 
 
-    const {generateWord, vocabulary} = useContext(VocabularyContext);
+    const {generateWord} = useContext(VocabularyContext);
     const generatedWord = useSelector(state => state.words.generatedWord);
+    const vocabulary = useSelector(state => state.vocabulary)
     const dispatch = useDispatch();
 
     useEffect(() => {
