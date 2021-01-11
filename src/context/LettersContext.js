@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {setCorrectLetters} from '../features/letters/correctLettersSlice';
 import {addWrongLetter, clearWrongLetters} from '../features/letters/wrongLettersSlice';
-import {setIsLastlyGuessedLetterWrong} from '../features/letters/isLastlyGuessedLetterWrongSlice';
+import {isLastlyGuessedLetterWrong} from '../features/letters/guessedLetterPropertiesSlice';
 
 export const LettersContext = React.createContext();
 
@@ -35,7 +35,7 @@ export const LettersProvider = (props) => {
             correctLetters,
             wrongLetters,
             // isLastlyGuessedLetterWrong,
-            setIsLastlyGuessedLetterWrong
+            // setIsLastlyGuessedLetterWrong
         }} >
             {props.children}
         </LettersContext.Provider>

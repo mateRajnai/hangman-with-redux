@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 import {setCorrectLetters} from '../../features/letters/correctLettersSlice';
 import {addWrongLetter} from '../../features/letters/wrongLettersSlice';
-import {setIsGuessedLetterWrong} from '../../features/letters/guessedLetterPropertiesSlice';
+import {saveGuessedLetter, setIsGuessedLetterWrong} from '../../features/letters/guessedLetterPropertiesSlice';
 
 
 const GuessedLetter = () => {
@@ -16,14 +16,14 @@ const GuessedLetter = () => {
     const wrongLetters = useSelector(state => state.wrongLetters);
     const dispatch = useDispatch();
 
-    const checkGuessedLetterWasAlreadyGuessed = (e) => {
-        const guessedLetter = e.target.getAttribute("data-guessed-letter");
+    const guessLetter = () => {
+        const guessedLetter = letter;
         const isAlreadyGuessed = wrongLetters.includes(guessedLetter) || correctLetters.includes(guessedLetter);
         if (!isAlreadyGuessed) 
-            saveGuessedLetter(guessedLetter);
+            dispatch(saveGuessedLetter(guessedLetter));
     }
 
-    const saveGuessedLetter = (guessedLetter) => {
+    const saveGuessedLetterTT = (guessedLetter) => {
         let correctLettersToBeUpdated = [...correctLetters];
         const guessedLetterIsWrong = updateCorrectLettersWhileSettingGuessedLetterIsWrong(
                                                                 correctLettersToBeUpdated, 
@@ -57,10 +57,10 @@ const GuessedLetter = () => {
                         onChange={e => setLetter(e.target.value)}></input>
                 <button type="button" 
                         data-guessed-letter={letter} 
-                        onClick={e => {
-                                checkGuessedLetterWasAlreadyGuessed(e); 
+                        onClick={() => {
+                                guessLetter(letter); 
                                 setLetter("");
-                                }} 
+                            }}
                         disabled={letter.length !== 1}>Guess letter!</button>
         </StyleWrapper>
     );

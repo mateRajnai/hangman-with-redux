@@ -9,12 +9,16 @@ const guessedLetterPropertiesSlice = createSlice({
     name: 'guessedLetterProperties',
     initialState,
     reducers: {
+        saveGuessedLetter(state, action) {
+            state.letter = action.payload;
+        },
+
         setIsGuessedLetterWrong(state, action) {
             state.isWrong = action.payload;
         }
     }
 })
 
-export const {setIsGuessedLetterWrong} = guessedLetterPropertiesSlice.actions;
+export const {saveGuessedLetter, setIsGuessedLetterWrong} = guessedLetterPropertiesSlice.actions;
 
 export default guessedLetterPropertiesSlice.reducer;
