@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react';
 import styled from 'styled-components';
-import {GameStatusContext} from '../context/GameStatusContext';
 import {DrawingContext} from '../context/DrawingContext';
 import {LettersContext} from '../context/LettersContext';
 import {useLocation} from 'react-router-dom';
