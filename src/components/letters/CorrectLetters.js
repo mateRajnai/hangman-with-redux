@@ -4,13 +4,25 @@ import {v4 as uuidv4} from 'uuid';
 import CorrectLetter from './CorrectLetter';
 import {setIsPlayerWon, setIsEndOfGame} from '../../features/gameStatusSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import {setCorrectLetters} from '../../features/letters/correctLettersSlice';
 
 const CorrectLetters = () => {
 
     const correctLetters = useSelector(state => state.correctLetters)
     const dispatch = useDispatch();
+    const generatedWord = useSelector(state=> state.words.generatedWord);
 
-    
+    useEffect(() => {
+        dispatch(setCorrectLetters(createArrayContainingNullsWithLengthOf(generatedWord.length)));
+    }, [generatedWord])
+
+    const createArrayContainingNullsWithLengthOf = (length) => {
+        let array = [];
+        for (let i = 0; i < length; i++) {
+            array[i] = null;
+        }
+        return array;
+    }
 
     useEffect(() => {
         if (!correctLetters.includes(null) && correctLetters.length !== 0) {
