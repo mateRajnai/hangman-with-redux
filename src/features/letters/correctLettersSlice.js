@@ -8,7 +8,7 @@ const correctLettersSlice = createSlice({
     reducers: {
         setCorrectLetters(state, action) {
             state = action.payload
-            // return state
+            return state
         }
 
     }
