@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {VocabularyContext} from './VocabularyContext';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
+import {setIsPlayerWon, setIsEndOfGame} from '../features/gameStatusSlice';
 export const GameStatusContext = React.createContext();
 
 export const GameStatusProvider = (props) => {
@@ -12,9 +13,11 @@ export const GameStatusProvider = (props) => {
 
     const generateWord = useSelector(state => state.words.generateWord);
 
+    const dispatch = useDispatch();
+
     const startNewGame = (e) => {
-        setIsEndOfGame(false);
-        setIsPlayerWon(false);
+        dispatch(setIsEndOfGame(false));
+        dispatch(setIsPlayerWon(false));
         generateWord(e);
     }
 
