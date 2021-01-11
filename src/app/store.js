@@ -7,9 +7,9 @@ import wrongLettersReducer from '../features/letters/wrongLettersSlice';
 import isLastlyGuessedLetterWrongReducer from '../features/letters/isLastlyGuessedLetterWrongSlice';
 export default configureStore({
     reducer: {
+        gameStatus: gameStatusReducer,
         vocabulary: vocabularyReducer,
         words: wordsReducer,
-        gameStatus: gameStatusReducer,
         correctLetters: correctLettersReducer,
         wrongLetters: wrongLettersReducer,
         isLastlyGuessedLetterWrong: isLastlyGuessedLetterWrongReducer
