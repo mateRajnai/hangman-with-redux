@@ -1,27 +1,49 @@
-import React, {useContext} from 'react';
-import { GameStatusContext } from '../context/GameStatusContext';
+import React from 'react';
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {setIsPlayerWon, setIsEndOfGame} from '../features/gameStatusSlice';
+import {setGeneratedWord, setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
+
 
 const GameEndingFeedback = () => {
 
-    const {startNewGame} = useContext(GameStatusContext);
     const isPlayerWon = useSelector(state => state.gameStatus.isPlayerWon);
     const isEndOfGame = useSelector(state => state.gameStatus.isEndOfGame);
+    const vocabulary = useSelector(state => state.vocabulary);
+    const generatedWord = useSelector(state => state.words.generatedWord);
+    const dispatch = useDispatch();
+
+    const startNewGame = () => {
+        dispatch(setIsEndOfGame(false));
+        dispatch(setIsPlayerWon(false));
+        dispatch(setWordBeforeVisitingVocabularies(generatedWord));
+        let word;
+        switch (vocabulary) {
+            case "English":
+                word = require('random-words')();
+                break;
+            case "German":
+                word = require('random-noun-generator-german')();
+                break;
+            default:
+                word = "apple";
+                break;
+        }
+        dispatch(setGeneratedWord(word)); 
+    }
+
 
     return (
         isEndOfGame &&
         <StyleWrapper id="game-ending-alert">
             <div>
-
-                            <strong>{isPlayerWon ? 
-                                "Well done! You won the game." : 
-                                "Oh snap! Game over."}</strong>
-                                <br></br>
-                            <button onClick={e => startNewGame(e)} className="new-game-button">
-                                Start new game
-                            </button>
-
+                <strong>{isPlayerWon ? 
+                    "Well done! You won the game." : 
+                    "Oh snap! Game over."}</strong>
+                    <br></br>
+                <button onClick={startNewGame} className="new-game-button">
+                    Start new game
+                </button>
             </div>
         </StyleWrapper>
     );
