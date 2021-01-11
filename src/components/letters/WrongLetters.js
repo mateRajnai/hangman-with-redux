@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import styled from 'styled-components'
 import WrongLetter from './WrongLetter';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {clearWrongLetters} from '../../features/letters/wrongLettersSlice';
 
 const WrongLetters = () => {
 
+    const generatedWord = useSelector(state => state.words.generatedWord);
     const wrongLetters = useSelector(state => state.wrongLetters);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {   
+        dispatch(clearWrongLetters());
+    }, [generatedWord])
 
     return ( 
         <StyleWrapper id="wrong-letters" className="styled-div">
