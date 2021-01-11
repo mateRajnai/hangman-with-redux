@@ -4,15 +4,17 @@ import {v4 as uuidv4} from 'uuid';
 import {LettersContext} from '../../context/LettersContext';
 import CorrectLetter from './CorrectLetter';
 import {setIsPlayerWon, setIsEndOfGame} from '../../features/gameStatusSlice';
+import {useDispatch} from 'react-redux';
 
 const CorrectLetters = () => {
 
     const {correctLetters} = useContext(LettersContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (!correctLetters.includes(null) && correctLetters.length !== 0) {
-            setIsEndOfGame(true);
-            setIsPlayerWon(true);
+            dispatch(setIsEndOfGame(true));
+            dispatch(setIsPlayerWon(true));
         }
     }, [correctLetters, setIsEndOfGame, setIsPlayerWon])    
     
