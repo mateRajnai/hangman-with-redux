@@ -4,7 +4,7 @@ import {DrawingContext} from '../context/DrawingContext';
 import {useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {setIsEndOfGame} from '../features/gameStatusSlice';
-import {setIsLastlyGuessedLetterWrong} from '../features/letters/isLastlyGuessedLetterWrongSlice';
+import {setIsGuessedLetterWrong} from '../features/letters/guessedLetterPropertiesSlice';
 
 const Drawing = () => {
 
@@ -15,7 +15,7 @@ const Drawing = () => {
     const generatedWord = useSelector(state => state.words.generatedWord);
     const wordBeforeVisitingVocabularies = useSelector(state => state.words.wordBeforeVisitingVocabularies);
     const wrongLetters = useSelector(state => state.wrongLetters);
-    const isLastlyGuessedLetterWrong = useSelector(state => state.isLastlyGuessedLetterWrong);
+    const isLastlyGuessedLetterWrong = useSelector(state => state.guessedLetterProperties.isWrong);
     const isEndOfGame = useSelector(state => state.gameStatus.isEndOfGame);
     
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Drawing = () => {
 
     useEffect(() => {
         return () => {
-            dispatch(setIsLastlyGuessedLetterWrong(false));
+            dispatch(setIsGuessedLetterWrong(false));
         }
     }, [])
     
@@ -33,14 +33,14 @@ const Drawing = () => {
     useEffect(() => {
         draw();
     }, [drawingParts, wrongLetters, isLastlyGuessedLetterWrong, 
-        isEndOfGame, setIsEndOfGame, setIsLastlyGuessedLetterWrong])
+        isEndOfGame, setIsEndOfGame, setIsGuessedLetterWrong])
 
     const draw = () => {
         if (!isEndOfGame && isLastlyGuessedLetterWrong) {
             drawingParts[indexOfDrawingParts].classList.add("draw");
             if (drawingParts[indexOfDrawingParts + 1] === undefined) {
                 dispatch(setIsEndOfGame(true));
-                dispatch(setIsLastlyGuessedLetterWrong(false));
+                dispatch(setIsGuessedLetterWrong(false));
             } else {
                 setIndexOfDrawingParts(index => index + 1);
             }

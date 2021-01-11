@@ -15,6 +15,6 @@ const guessedLetterPropertiesSlice = createSlice({
     }
 })
 
-export const {setIsLastlyGuessedLetterWrong} = guessedLetterPropertiesSlice.actions;
+export const {setIsGuessedLetterWrong} = guessedLetterPropertiesSlice.actions;
 
 export default guessedLetterPropertiesSlice.reducer;

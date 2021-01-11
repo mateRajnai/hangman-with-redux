@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 import {setCorrectLetters} from '../../features/letters/correctLettersSlice';
 import {addWrongLetter} from '../../features/letters/wrongLettersSlice';
-import {setIsLastlyGuessedLetterWrong} from '../../features/letters/isLastlyGuessedLetterWrongSlice';
+import {setIsGuessedLetterWrong} from '../../features/letters/guessedLetterPropertiesSlice';
 
 
 const GuessedLetter = () => {
@@ -30,10 +30,10 @@ const GuessedLetter = () => {
                                                                 guessedLetter);                                      
         if (guessedLetterIsWrong) {
             dispatch(addWrongLetter(guessedLetter));
-            dispatch(setIsLastlyGuessedLetterWrong(true));  
+            dispatch(setIsGuessedLetterWrong(true));  
         } else {
             dispatch(setCorrectLetters(correctLettersToBeUpdated));
-            dispatch(setIsLastlyGuessedLetterWrong(false));
+            dispatch(setIsGuessedLetterWrong(false));
         }
     }
 
