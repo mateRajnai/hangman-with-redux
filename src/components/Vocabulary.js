@@ -5,6 +5,7 @@ import germanFlag from '../images/german_flag.png';
 import {useDispatch, useSelector} from 'react-redux';
 import {setVocabulary} from '../features/vocabulary/vocabularySlice';
 import {setGeneratedWord, setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
+import WordGenerator from './WordGenerator';
 
 const Vocabulary = () => {
 
@@ -16,18 +17,7 @@ const Vocabulary = () => {
         const chosenVocabulary = event.target.getAttribute("data-vocabulary") || vocabulary;
         dispatch(setVocabulary(chosenVocabulary));
         dispatch(setWordBeforeVisitingVocabularies(generatedWord));
-        let word;
-        switch (chosenVocabulary) {
-            case "English":
-                word = require('random-words')();
-                break;
-            case "German":
-                word = require('random-noun-generator-german')();
-                break;
-            default:
-                word = "apple";
-                break;
-        }
+        let word = WordGenerator.generate(chosenVocabulary);
         dispatch(setGeneratedWord(word)); 
     }
 
