@@ -7,6 +7,7 @@ export const GameStatusProvider = (props) => {
 
     const [isEndOfGame, setIsEndOfGame] = useState(false);
     const [isPlayerWon, setIsPlayerWon] = useState(false);
+    
     const generateWord = useSelector(state => state.words.generateWord);
 
     const startNewGame = (e) => {
