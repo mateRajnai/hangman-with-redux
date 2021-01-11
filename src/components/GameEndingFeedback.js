@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 import {setIsPlayerWon, setIsEndOfGame} from '../features/gameStatusSlice';
 import {setGeneratedWord, setWordBeforeVisitingVocabularies} from '../features/wordsSlice';
-
+import WordGenerator from './WordGenerator';
 
 const GameEndingFeedback = () => {
 
@@ -17,18 +17,7 @@ const GameEndingFeedback = () => {
         dispatch(setIsEndOfGame(false));
         dispatch(setIsPlayerWon(false));
         dispatch(setWordBeforeVisitingVocabularies(generatedWord));
-        let word;
-        switch (vocabulary) {
-            case "English":
-                word = require('random-words')();
-                break;
-            case "German":
-                word = require('random-noun-generator-german')();
-                break;
-            default:
-                word = "apple";
-                break;
-        }
+        let word = WordGenerator.generate(vocabulary);
         dispatch(setGeneratedWord(word)); 
     }
 
