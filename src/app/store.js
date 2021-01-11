@@ -4,7 +4,7 @@ import wordsReducer from '../features/wordsSlice';
 import gameStatusReducer from '../features/gameStatusSlice';
 import correctLettersReducer from '../features/letters/correctLettersSlice';
 import wrongLettersReducer from '../features/letters/wrongLettersSlice';
-import lastlyGuessedLetterReducer from '../features/letters/isLastlyGuessedLetterWrongSlice';
+import isLastlyGuessedLetterWrongReducer from '../features/letters/isLastlyGuessedLetterWrongSlice';
 export default configureStore({
     reducer: {
         vocabulary: vocabularyReducer,
@@ -12,6 +12,6 @@ export default configureStore({
         gameStatus: gameStatusReducer,
         correctLetters: correctLettersReducer,
         wrongLetters: wrongLettersReducer,
-        lastlyGuessedLetter: lastlyGuessedLetterReducer
+        isLastlyGuessedLetterWrong: isLastlyGuessedLetterWrongReducer
     }
 })
