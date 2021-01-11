@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const initialState = undefined;
+const initialState = null;
 
 const lastlyGuessedLetterSlice = createSlice({
     name: 'lastlyGuessedLetterSlice',
