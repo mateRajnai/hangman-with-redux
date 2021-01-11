@@ -11,7 +11,7 @@ export const GameStatusProvider = (props) => {
     // const [isPlayerWon, setIsPlayerWon] = useState(false);
     const isPlayerWon = useSelector(state => state.gameStatus.isPlayerWon);
 
-    const generateWord = useSelector(state => state.words.generateWord);
+    const {generateWord} = useContext(VocabularyContext);
 
     const dispatch = useDispatch();
 
