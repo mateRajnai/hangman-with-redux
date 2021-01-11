@@ -10,7 +10,7 @@ const Drawing = () => {
 
 
     const generatedWord = useSelector(state => state.words.generatedWord);
-    const wordBeforeVisitingVocabularies = useSelector(state => state.wordBeforeVisitingVocabularies);
+    const wordBeforeVisitingVocabularies = useSelector(state => state.words.wordBeforeVisitingVocabularies);
 
     const {isEndOfGame, setIsEndOfGame} = useContext(GameStatusContext);
     const {drawingParts, indexOfDrawingParts, 
@@ -47,10 +47,13 @@ const Drawing = () => {
 
 
     useEffect(() => {
+
         clearDrawing();
     }, [generatedWord])
 
     const clearDrawing = () => {
+        console.log(generatedWord)
+        console.log(wordBeforeVisitingVocabularies)
         if (wordBeforeVisitingVocabularies !== generatedWord) {
             for (let i = 0; i < drawingParts.length; i++) {
                 drawingParts[i].classList.remove("draw");
