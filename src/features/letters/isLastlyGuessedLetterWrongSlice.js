@@ -8,6 +8,7 @@ const isLastlyGuessedLetterWrongSlice = createSlice({
     reducers: {
         setIsLastlyGuessedLetterWrong(state, action) {
             state = action.payload;
+            return state;
         }
     }
 })

@@ -1,30 +1,31 @@
 import React, {useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import {DrawingContext} from '../context/DrawingContext';
-import {LettersContext} from '../context/LettersContext';
 import {useLocation} from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import {setIsEndOfGame} from '../features/gameStatusSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {setIsLastlyGuessedLetterWrong} from '../features/letters/isLastlyGuessedLetterWrongSlice';
 
 const Drawing = () => {
 
 
-    const generatedWord = useSelector(state => state.words.generatedWord);
-    const wordBeforeVisitingVocabularies = useSelector(state => state.words.wordBeforeVisitingVocabularies);
-    const isEndOfGame = useSelector(state => state.gameStatus.isEndOfGame);
-    const dispatch = useDispatch();
     const {drawingParts, indexOfDrawingParts, 
         setIndexOfDrawingParts} = useContext(DrawingContext);
-    const {wrongLetters, isLastlyGuessedLetterWrong, 
-        setIsLastlyGuessedLetterWrong} = useContext(LettersContext);
+
+    const generatedWord = useSelector(state => state.words.generatedWord);
+    const wordBeforeVisitingVocabularies = useSelector(state => state.words.wordBeforeVisitingVocabularies);
+    const wrongLetters = useSelector(state => state.wrongLetters);
+    const isLastlyGuessedLetterWrong = useSelector(state => state.isLastlyGuessedLetterWrong);
+    const isEndOfGame = useSelector(state => state.gameStatus.isEndOfGame);
+    
+    const dispatch = useDispatch();
 
     let location = useLocation();
     let currentPath = location.pathname;
 
     useEffect(() => {
         return () => {
-            setIsLastlyGuessedLetterWrong(false);
+            dispatch(setIsLastlyGuessedLetterWrong(false));
         }
     }, [])
     
@@ -39,7 +40,7 @@ const Drawing = () => {
             drawingParts[indexOfDrawingParts].classList.add("draw");
             if (drawingParts[indexOfDrawingParts + 1] === undefined) {
                 dispatch(setIsEndOfGame(true));
-                setIsLastlyGuessedLetterWrong(false);
+                dispatch(setIsLastlyGuessedLetterWrong(false));
             } else {
                 setIndexOfDrawingParts(index => index + 1);
             }

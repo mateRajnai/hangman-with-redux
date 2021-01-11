@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {setCorrectLetters} from '../features/letters/correctLettersSlice';
 import {addWrongLetter, clearWrongLetters} from '../features/letters/wrongLettersSlice';
@@ -13,7 +13,6 @@ export const LettersProvider = (props) => {
     const wrongLetters = useSelector(state => state.wrongLetters);
     const isLastlyGuessedLetterWrong = useSelector(state => state.isLastlyGuessedLetterWrong)
     const dispatch = useDispatch();
-    // const [isLastlyGuessedLetterWrong, setIsLastlyGuessedLetterWrong] = useState();
 
     const checkGuessedLetterWasAlreadyGuessed = (e) => {
         const guessedLetter = e.target.getAttribute("data-guessed-letter");
