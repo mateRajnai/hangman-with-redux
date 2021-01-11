@@ -5,14 +5,16 @@ import {DrawingContext} from '../context/DrawingContext';
 import {LettersContext} from '../context/LettersContext';
 import {useLocation} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import {setIsEndOfGame} from '../features/gameStatusSlice';
+import {useDispatch} from 'react-redux';
 
 const Drawing = () => {
 
 
     const generatedWord = useSelector(state => state.words.generatedWord);
     const wordBeforeVisitingVocabularies = useSelector(state => state.words.wordBeforeVisitingVocabularies);
-
-    const {isEndOfGame, setIsEndOfGame} = useContext(GameStatusContext);
+    const isEndOfGame = useSelector(state => state.gameStatus.isEndOfGame);
+    const dispatch = useDispatch();
     const {drawingParts, indexOfDrawingParts, 
         setIndexOfDrawingParts} = useContext(DrawingContext);
     const {wrongLetters, isLastlyGuessedLetterWrong, 
@@ -37,7 +39,7 @@ const Drawing = () => {
         if (!isEndOfGame && isLastlyGuessedLetterWrong) {
             drawingParts[indexOfDrawingParts].classList.add("draw");
             if (drawingParts[indexOfDrawingParts + 1] === undefined) {
-                setIsEndOfGame(true);
+                dispatch(setIsEndOfGame(true));
                 setIsLastlyGuessedLetterWrong(false);
             } else {
                 setIndexOfDrawingParts(index => index + 1);
