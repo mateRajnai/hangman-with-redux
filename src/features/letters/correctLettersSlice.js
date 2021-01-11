@@ -6,6 +6,10 @@ const correctLettersSlice = createSlice({
     name: 'correctLetters',
     initialState,
     reducers: {
+        setCorrectLetters(state, action) {
+            state = action.payload
+            // return state
+        }
 
     }
 
