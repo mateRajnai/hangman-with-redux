@@ -13,16 +13,12 @@ const CorrectLetters = () => {
     const generatedWord = useSelector(state=> state.words.generatedWord);
 
     useEffect(() => {
-        dispatch(setCorrectLetters(createArrayContainingNullsWithLengthOf(generatedWord.length)));
-    }, [generatedWord])
-
-    const createArrayContainingNullsWithLengthOf = (length) => {
         let array = [];
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < generatedWord.length; i++) {
             array[i] = null;
         }
-        return array;
-    }
+        dispatch(setCorrectLetters(array));
+    }, [generatedWord])
 
     useEffect(() => {
         if (!correctLetters.includes(null) && correctLetters.length !== 0) {
