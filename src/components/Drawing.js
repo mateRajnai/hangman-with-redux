@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react';
 import styled from 'styled-components';
-import {VocabularyContext} from '../context/VocabularyContext';
 import {GameStatusContext} from '../context/GameStatusContext';
 import {DrawingContext} from '../context/DrawingContext';
 import {LettersContext} from '../context/LettersContext';
@@ -9,9 +8,9 @@ import { useSelector } from 'react-redux';
 
 const Drawing = () => {
 
-    const {wordBeforeVisitingVocabularies} = useContext(VocabularyContext);
-    
+
     const generatedWord = useSelector(state => state.words.generatedWord);
+    const wordBeforeVisitingVocabularies = useSelector(state => state.wordBeforeVisitingVocabularies);
 
     const {isEndOfGame, setIsEndOfGame} = useContext(GameStatusContext);
     const {drawingParts, indexOfDrawingParts, 
