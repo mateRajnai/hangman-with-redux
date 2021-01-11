@@ -20,10 +20,10 @@ const GuessedLetter = () => {
         const guessedLetter = letter;
         const isAlreadyGuessed = wrongLetters.includes(guessedLetter) || correctLetters.includes(guessedLetter);
         if (!isAlreadyGuessed) 
-            dispatch(saveGuessedLetter(guessedLetter));
+            saveGuessedLetter(guessedLetter);
     }
 
-    const saveGuessedLetterTT = (guessedLetter) => {
+    const saveGuessedLetter = (guessedLetter) => {
         let correctLettersToBeUpdated = [...correctLetters];
         const guessedLetterIsWrong = updateCorrectLettersWhileSettingGuessedLetterIsWrong(
                                                                 correctLettersToBeUpdated, 
